@@ -94,21 +94,11 @@
       }, 1000);
     } else {
       msg.style.color = "red";
-      msg.innerText = " Invalid username, password or captcha.";
+      msg.innerText = "Invalid username, password or captcha.";
     }
+    return false; // Prevent default form submission
   }
-  if (user === USER && pass === PASS && parseInt(captcha) === (num1 + num2)) {
-  msg.style.color = "green";
-  msg.innerText = "✅ Login Successful!";
-  // Redirect to welcome page after 1 sec
-  setTimeout(() => {
-    window.location.href = "welcome.html";
-  }, 1000);
-}
-
 </script>
 
 </body>
 </html>
-
-
