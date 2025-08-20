@@ -23,7 +23,7 @@
       text-align: center;
       margin-bottom: 20px;
     }
-    input[type="text"], input[type="password"] {
+    input[type="text"], input[type="password"], input[type="number"] {
       width: 100%;
       padding: 10px;
       margin: 8px 0;
@@ -56,34 +56,49 @@
   <form onsubmit="return validateLogin(event)">
     <input type="text" id="username" placeholder="Username" required>
     <input type="password" id="password" placeholder="Password" required>
+
+    <!-- Captcha Section -->
+    <p id="captcha-question" style="font-weight:bold;"></p>
+    <input type="number" id="captcha-answer" placeholder="Enter captcha" required>
+
     <button type="submit">Login</button>
   </form>
   <div class="message" id="message"></div>
 </div>
 
 <script>
-  // Dummy credentials (students can change for fun)
+  // Dummy credentials
   const USER = "admin";
   const PASS = "1234";
 
+  // Generate a simple captcha (random numbers)
+  let num1 = Math.floor(Math.random() * 10) + 1;
+  let num2 = Math.floor(Math.random() * 10) + 1;
+  document.getElementById("captcha-question").innerText = 
+    "Captcha: " + num1 + " + " + num2 + " = ?";
+
   function validateLogin(event) {
-    event.preventDefault(); // stop form from refreshing page
+    event.preventDefault(); // stop form refresh
 
     let user = document.getElementById("username").value;
     let pass = document.getElementById("password").value;
+    let captcha = document.getElementById("captcha-answer").value;
     let msg = document.getElementById("message");
 
-    if (user === USER && pass === PASS) {
+    if (user === USER && pass === PASS && parseInt(captcha) === (num1 + num2)) {
       msg.style.color = "green";
       msg.innerText = "✅ Login Successful!";
+      // Redirect to welcome page after 1 sec
+      setTimeout(() => {
+        window.location.href = "welcome.html";
+      }, 1000);
     } else {
       msg.style.color = "red";
-      msg.innerText = "❌ Invalid username or password.";
+      msg.innerText = " Invalid username, password or captcha.";
     }
   }
 </script>
 
 </body>
 </html>
-
 
