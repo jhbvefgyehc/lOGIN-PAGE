@@ -97,8 +97,18 @@
       msg.innerText = " Invalid username, password or captcha.";
     }
   }
+  if (user === USER && pass === PASS && parseInt(captcha) === (num1 + num2)) {
+  msg.style.color = "green";
+  msg.innerText = "✅ Login Successful!";
+  // Redirect to welcome page after 1 sec
+  setTimeout(() => {
+    window.location.href = "welcome.html";
+  }, 1000);
+}
+
 </script>
 
 </body>
 </html>
+
 
